@@ -10,7 +10,7 @@ applicationLink: "https://placementportal.college.edu/infosys2025"
 
 ## Timeline of Updates
 
-**Update on: 1/8/2025, 1:44:47 am**
+**Update on: 1/8/2025, 1:53:56 am**
 
 > Subject: Campus Placement Drive - Infosys
 > 
