@@ -1,0 +1,52 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+    const onCampus = await getCollection('on-campus');
+    const offCampus = await getCollection('off-campus');
+    const allDrives = [...onCampus, ...offCampus].filter(d => d.data.company !== 'Placeholder');
+
+    return allDrives.map(entry => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
+}
+
+type Props = {
+    entry: CollectionEntry<'on-campus'> | CollectionEntry<'off-campus'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={`${entry.data.company} - ${entry.data.role}`}>
+    <article class="prose prose-invert prose-lg max-w-none prose-headings:text-slate-100 prose-a:text-blue-400 hover:prose-a:text-blue-300">
+        <h1 class="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-teal-300 bg-clip-text text-transparent">{entry.data.company}</h1>
+        <p class="text-2xl text-slate-300 -mt-2 mb-8">{entry.data.role}</p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 not-prose">
+            {'ctc' in entry.data && entry.data.ctc && entry.data.ctc !== 'N/A' && <div class="bg-slate-800 p-4 rounded-lg">
+                <h4 class="text-sm text-slate-400">CTC</h4>
+                <p class="text-xl font-semibold text-green-400">{entry.data.ctc}</p>
+            </div>}
+            {'stipend' in entry.data && entry.data.stipend && entry.data.stipend !== 'N/A' && <div class="bg-slate-800 p-4 rounded-lg">
+                <h4 class="text-sm text-slate-400">Stipend</h4>
+                <p class="text-xl font-semibold text-yellow-400">{entry.data.stipend}</p>
+            </div>}
+            {'deadline' in entry.data && entry.data.deadline && entry.data.deadline !== 'N/A' && <div class="bg-slate-800 p-4 rounded-lg">
+                <h4 class="text-sm text-slate-400">Deadline</h4>
+                <p class="text-xl font-semibold text-red-400">{entry.data.deadline}</p>
+            </div>}
+             {'batch' in entry.data && entry.data.batch && entry.data.batch !== 'N/A' && <div class="bg-slate-800 p-4 rounded-lg">
+                <h4 class="text-sm text-slate-400">Batch</h4>
+                <p class="text-xl font-semibold text-purple-400">{entry.data.batch}</p>
+            </div>}
+        </div>
+
+        {entry.data.applicationLink && <a href={entry.data.applicationLink} target="_blank" rel="noopener noreferrer" class="block text-center w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg no-underline mb-12 transition-colors">Apply Now</a>}
+        
+        <Content />
+    </article>
+</Layout>

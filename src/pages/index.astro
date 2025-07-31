@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+
+// Fetch On-Campus Drives, sorted by newest first
+const onCampusDrives = (await getCollection('on-campus')).filter(d => d.data.company !== 'Placeholder').sort(
+    (a, b) => new Date(b.id.split('/').pop().split('-').slice(0,3).join('-')).getTime() - new Date(a.id.split('/').pop().split('-').slice(0,3).join('-')).getTime()
+);
+
+// Fetch Off-Campus Drives, sorted by newest first
+const offCampusDrives = (await getCollection('off-campus')).filter(d => d.data.company !== 'Placeholder').sort(
+    (a, b) => new Date(b.id.split('/').pop().split('-').slice(0,3).join('-')).getTime() - new Date(a.id.split('/').pop().split('-').slice(0,3).join('-')).getTime()
+);
+---
+
+<Layout title="VCE Placement Hub - Home">
+	<section id="on-campus" class="mb-16">
+		<h2 class="text-3xl font-bold mb-6 pb-2 border-b-2 border-blue-500 inline-block">On-Campus Drives</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			{onCampusDrives.map(drive => (
+				<Card 
+					title={drive.data.company}
+					role={drive.data.role}
+					ctc={drive.data.ctc}
+					stipend={drive.data.stipend}
+					deadline={drive.data.deadline}
+					url={`/vce-placement-hub/opportunities/${drive.slug}`}
+				/>
+			))}
+			{onCampusDrives.length === 0 && <p class="md:col-span-3 text-center text-slate-400">No active on-campus drives listed.</p>}
+		</div>
+	</section>
+
+	<section id="off-campus">
+		<h2 class="text-3xl font-bold mb-6 pb-2 border-b-2 border-teal-400 inline-block">Off-Campus Opportunities</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			{offCampusDrives.map(drive => (
+				<Card 
+					title={drive.data.company}
+					role={drive.data.role}
+					ctc="N/A"
+					stipend="Community Sourced"
+					deadline="N/A"
+					url={`/vce-placement-hub/opportunities/${drive.slug}`}
+				/>
+			))}
+			{offCampusDrives.length === 0 && <p class="md:col-span-3 text-center text-slate-400">No community-submitted opportunities yet.</p>}
+		</div>
+	</section>
+</Layout>

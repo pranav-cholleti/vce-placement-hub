@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// IMPORTANT: You will get this URL from your Pipedream workflow in Part 2.
+const SUBMISSION_WORKFLOW_URL = "YOUR_PIPEDREAM_SUBMISSION_WORKFLOW_URL_HERE";
+---
+
+<Layout title="Submit an Opportunity">
+    <h1 class="text-3xl font-bold mb-6">Submit an Off-Campus Opportunity</h1>
+    <p class="text-slate-400 mb-8 max-w-2xl">
+        Found an internship or job? Share it with the community! Your submission will be reviewed by an admin before going live. This creates a Pull Request on GitHub for moderation.
+    </p>
+
+    <form id="submission-form" class="max-w-xl space-y-6">
+        <div>
+            <label for="company" class="block text-sm font-medium text-slate-300 mb-1">Company Name</label>
+            <input type="text" id="company" name="company" required class="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+            <label for="role" class="block text-sm font-medium text-slate-300 mb-1">Role / Position</label>
+            <input type="text" id="role" name="role" required class="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+            <label for="batch" class="block text-sm font-medium text-slate-300 mb-1">Eligible Batch (e.g., 2025, 2026)</label>
+            <input type="text" id="batch" name="batch" required class="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+            <label for="applicationLink" class="block text-sm font-medium text-slate-300 mb-1">Application Link (URL)</label>
+            <input type="url" id="applicationLink" name="applicationLink" required class="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+            <label for="notes" class="block text-sm font-medium text-slate-300 mb-1">Additional Notes (Optional)</label>
+            <textarea id="notes" name="notes" rows="4" class="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+        </div>
+        <div>
+            <button type="submit" id="submit-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors disabled:bg-slate-500 disabled:cursor-not-allowed">
+                Submit for Review
+            </button>
+        </div>
+    </form>
+    <div id="form-status" class="mt-4 text-center"></div>
+
+    <script define:vars={{ SUBMISSION_WORKFLOW_URL }}>
+        const form = document.getElementById('submission-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const formStatus = document.getElementById('form-status');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitBtn.setAttribute('disabled', 'true');
+            submitBtn.innerText = 'Submitting...';
+            formStatus.innerText = '';
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch(SUBMISSION_WORKFLOW_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    form.reset();
+                    formStatus.className = 'text-green-400';
+                    formStatus.innerHTML = `✅ Success! Your submission is now pending review. <a href="${result.pullRequestUrl}" target="_blank" class="underline">Track it here</a>.`;
+                } else {
+                    throw new Error(result.error || 'Something went wrong.');
+                }
+            } catch (error) {
+                formStatus.className = 'text-red-400';
+                formStatus.innerText = `❌ Error: ${error.message}`;
+            } finally {
+                submitBtn.removeAttribute('disabled');
+                submitBtn.innerText = 'Submit for Review';
+            }
+        });
+    </script>
+</Layout>
