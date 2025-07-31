@@ -1,30 +1,74 @@
 ---
-company: "Infosys"
-role: "Software Development Engineer (SDE)"
-ctc: "₹6 LPA"
-stipend: "₹15,000/month"
-deadline: "August 15, 2025"
-batch: "2025"
-applicationLink: "https://placementportal.college.edu/infosys2025"
+company: "Futures First"
+role: "N/A"
+ctc: "N/A"
+stipend: "N/A"
+deadline: "N/A"
+batch: "All branches of B.E."
+applicationLink: "https://events.teams.microsoft.com/event/7bbf2049-79ee"
 ---
 
 ## Timeline of Updates
 
-**Update on: 1/8/2025, 1:53:56 am**
+**Update on: 1/8/2025, 1:55:43 am**
 
-> Subject: Campus Placement Drive - Infosys
+>   Dear Sir / Madam (All branches of B.E.)
+> PPT & E-test Schedule: Futures First |
+> Hi Team,
 > 
->     Dear Students,
+> Please see below the schedule for the Pre-Placement Talk (PPT) and E-test.
 > 
->     Infosys will be visiting our campus for hiring freshers for the role of
-> Software Development Engineer (SDE). The CTC is ₹6 LPA, and final-year
-> students from the 2025 batch are eligible. A stipend of ₹15,000/month will
-> be provided during the internship period.
+> Kindly inform the students that attendance for the Pre-Placement Talk is
+> mandatory. Please share the Teams Meet link for the PPT with them.
 > 
->     The last date to apply is August 15, 2025.
+> Pre-Placement Talk (PPT):
 > 
->     Apply here: https://placementportal.college.edu/infosys2025
 > 
->     Regards,
->     Placement Cell
+> Date: Friday, August 1, 2025
+> 
+> Time: 14:00 IST (Duration: 40 minutes)
+> 
+> Topic: Futures First Pre-Placement Talk
+> 
+> Link: Futures First Pre-Placement Talk - Meet Link (Students must register
+> as soon as they receive this link. Only once registered, they will get the
+> joining link for the PPT)
+> https://events.teams.microsoft.com/event/7bbf2049-79ee
+> 
+> E-Test:
+> Date: Friday, August 1, 2025
+> Time: 16:00 IST (Duration: 35 minutes)
+> 
+> Note for Students:
+> The test will be conducted online and will cover topics such as aptitude,
+> quantitative reasoning, mathematics, logical reasoning, and financial
+> markets.
+> You will receive E-test login details by 15:00 IST tomorrow i.e. July 31,
+> 2025 from the email address "admin.metl@mercer.com" with the subject line:
+> “Deepa from Hertshten Group invites you to take Futures First Test Paper.”
+> Please check your spam/junk folders as well.
+> 
+> Be punctual. The test link will be accessible for only 10 minutes from the
+> scheduled time. After that, it will be deactivated and cannot be reopened.
+> 
+> You must be clearly visible on camera for the entire duration of the test.
+> Failure to comply will result in disqualification.
+> 
+> Do not open any other tabs or applications during the test. Any violations
+> will result in warnings, and repeated infractions will lead to
+> disqualification.
+> 
+> The test must be taken using Mettl Secure Browser (MSB).
+> 
+> Please download and install MSB well in advance, not on the day of the test.
+> The test email will include a sample test and system compatibility check.
+> Run the check immediately to ensure your device is ready.
+> 
+> If issues arise, contact the Mettl support team promptly. Do not delay this
+> step.
+> 
+> Download Links:
+> Windows: Download Link
+> Mac OS: Download Link
+> Installation Guides:
 > 
